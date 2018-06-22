@@ -4,10 +4,11 @@ import (
 	"net/http"
 	"log"
 	"fmt"
+	"os"
 )
 
 func main() {
-	port := 3000
+	port := os.Getenv("API_PORT")
 	http.HandleFunc("/customer", customerHandler)
 
 	log.Printf("Server starting on port %v\n", port)
@@ -28,6 +29,7 @@ func customerHandler(response http.ResponseWriter, request *http.Request) {
 }
 
 func listALlCustomers(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("Content-Type", "application/json")
 	response.Write([]byte("{}"))
 }
 
