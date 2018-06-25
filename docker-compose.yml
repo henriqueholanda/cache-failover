@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    networks:
+      default:
+        aliases:
+          - apihost
+    ports:
+      - "80:80"
+
+  database:
+    image: mongo:latest
+    command: mongod --nojournal
+    tmpfs: /data/db
+    networks:
+      default:
+        aliases:
+          - mongohost
+    ports:
+      - "27017:27017"
